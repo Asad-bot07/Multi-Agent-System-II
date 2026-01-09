@@ -1,0 +1,6 @@
+# environment variables
+.env
+# node modules
+node_modules
+# .ts output run command tsc agent.service.ts
+dist
