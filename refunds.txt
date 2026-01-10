@@ -1,0 +1,1 @@
+Refund for customer having customer id : 2408 has been initiated due to Shoot has been cancelled
