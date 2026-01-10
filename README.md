@@ -7,15 +7,6 @@ A central **Reception Agent** understands the user’s intent and routes the req
 > **Pixelhouse is only an example use case.**  
 > The system architecture itself is **generic, reusable, and not tied to any specific business domain**.
 
----
-
-## Features
-
-- Multi-agent architecture
-- Automatic agent handoff based on user intent
-- Clear separation of responsibilities
-- Built with `@openai/agents`
-- Environment-based configuration using `dotenv`
 
 ---
 ## Tech Stack
@@ -26,7 +17,38 @@ A central **Reception Agent** understands the user’s intent and routes the req
 - **dotenv**
 - **fs/promises** (persistence)
 ---
+## Project Structure
+```
+├── 📁 src
+│   ├── 📁 agent
+│   │   ├── 📄 agent.service.ts # Main entry point
+│   │   ├── 📄 booking.agent.ts # Handles bookings
+│   │   ├── 📄 checkVacancy.agent.ts # Manages team availabilty
+│   │   ├── 📄 refund.agent.ts # Handles refunds and write in database ( refund.txt)
+│   │   └── 📄 sales.agent.ts # Handles pricing and plans
+│   ├── 📁 data
+│   │   └── 📄 data.ts # Dummy data
+│   ├── 📁 tool
+│   │   └── 📄 tools.ts # Tools used by agents
+│   └── 📄 types.ts # TypeScript types
+├── ⚙️ .gitignore
+├── 📝 README.md
+├── ⚙️ package-lock.json
+├── ⚙️ package.json
+├── 📄 refunds.txt # The data of the one who ask for refund
+└── ⚙️ tsconfig.json
+```
 
+---
+
+## Features
+
+- Multi-agent architecture
+- Automatic agent handoff based on user intent
+- Clear separation of responsibilities
+- Built with `@openai/agents`
+- Environment-based configuration using `dotenv`
+---
 ## Architecture Overview
 
 The system is centered around a **Reception Agent** whose only job is to:
@@ -100,29 +122,14 @@ npm i dotenv
 OPENAI_API_KEY=your_openai_api_key = add your api key
 ```
 ---
-## Project Structure
-```
-├── 📁 src
-│   ├── 📁 agent
-│   │   ├── 📄 agent.service.ts # Main entry point
-│   │   ├── 📄 booking.agent.ts # Handles bookings
-│   │   ├── 📄 checkVacancy.agent.ts # Manages team availabilty
-│   │   ├── 📄 refund.agent.ts # Handles refunds and write in database ( refund.txt)
-│   │   └── 📄 sales.agent.ts # Handles pricing and plans
-│   ├── 📁 data
-│   │   └── 📄 data.ts # Dummy data
-│   ├── 📁 tool
-│   │   └── 📄 tools.ts # Tools used by agents
-│   └── 📄 types.ts # TypeScript types
-├── ⚙️ .gitignore
-├── 📝 README.md
-├── ⚙️ package-lock.json
-├── ⚙️ package.json
-├── 📄 refunds.txt # The data of the one who ask for refund
-└── ⚙️ tsconfig.json
-```
+## Upcoming Changes
+
+- Planning to add **input and output guardrails** to improve security, safety, and response constraints
+- Better validation of user inputs before agent handoff
+- Controlled and structured agent outputs to avoid unexpected responses
 
 ---
+
 ## Contact
 
 I am open to discussing opportunities and collaborations. Connect with me:
