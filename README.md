@@ -1,7 +1,9 @@
 # Multi-Agent System (Agent Handoff Architecture)
 
-This repository demonstrates a **multi-agent AI system with intelligent handoff**, built using the **OpenAI Agents SDK**.  
-A central **Reception Agent** understands the user’s intent and routes the request to the most suitable specialized agent similar to how a real-world receptionist works.
+This repository demonstrates a **production-ready multi-agent AI system with intelligent handoff**, built using the **OpenAI Agents SDK**.
+
+At the core of the system is a **Reception Agent** that understands user intent, applies **input/output guardrails**, and routes the request to the most suitable specialized agent similar to a real-world receptionist.
+
 
 > **Note**  
 > **Pixelhouse is only an example use case.**  
@@ -19,24 +21,20 @@ A central **Reception Agent** understands the user’s intent and routes the req
 ---
 ## Project Structure
 ```
-├── 📁 src
-│   ├── 📁 agent
-│   │   ├── 📄 agent.service.ts # Main entry point
-│   │   ├── 📄 booking.agent.ts # Handles bookings
-│   │   ├── 📄 checkVacancy.agent.ts # Manages team availabilty
-│   │   ├── 📄 refund.agent.ts # Handles refunds and write in database ( refund.txt)
-│   │   └── 📄 sales.agent.ts # Handles pricing and plans
-│   ├── 📁 data
-│   │   └── 📄 data.ts # Dummy data
-│   ├── 📁 tool
-│   │   └── 📄 tools.ts # Tools used by agents
-│   └── 📄 types.ts # TypeScript types
-├── ⚙️ .gitignore
-├── 📝 README.md
-├── ⚙️ package-lock.json
-├── ⚙️ package.json
-├── 📄 refunds.txt # The data of the one who ask for refund
-└── ⚙️ tsconfig.json
+├── 📁 agent
+│   ├── 📄 agent.service.ts # Main agent
+│   ├── 📄 booking.agent.ts # Booking agent
+│   ├── 📄 checkVacancy.agent.ts # Team managing agent
+│   ├── 📄 refund.agent.ts # Manages refund
+│   └── 📄 sales.agent.ts # Sales agent
+├── 📁 data
+│   └── 📄 data.ts # Dummy data
+├── 📁 guardrails
+│   ├── 📄 agentRes.guardrails.ts # Output Guardrails
+│   └── 📄 userInput.guardrails.ts # Input Guardrails
+├── 📁 tool
+│   └── 📄 tools.ts # Agent Tools
+└── 📄 types.ts # TS types
 ```
 
 ---
@@ -44,17 +42,21 @@ A central **Reception Agent** understands the user’s intent and routes the req
 ## Features
 
 - Multi-agent architecture
-- Automatic agent handoff based on user intent
-- Clear separation of responsibilities
-- Built with `@openai/agents`
-- Environment-based configuration using `dotenv`
+- Central **Reception Agent**
+- Automatic intent-based handoff
+- **Input guardrails** for safety & validation
+- **Output guardrails** for controlled responses
+- Modular and scalable design
 ---
 ## Architecture Overview
 
-The system is centered around a **Reception Agent** whose only job is to:
-1. Understand the user’s request
-2. Decide which agent is best suited
-3. Hand off the task to that agent
+### Reception Agent Responsibilities
+
+1. Understand the user’s intent  
+2. Apply **input guardrails**  
+3. Select the appropriate agent  
+4. Hand off the task  
+5. Apply **output guardrails** before responding 
 
 ### Available Agents
 
@@ -68,24 +70,30 @@ The system is centered around a **Reception Agent** whose only job is to:
 ---
 
 ## Agent Handoff Flow
-
 ```
 User Query
    ↓
+Input Guardrails
+   ↓
 Reception Agent
-   ↓ (intent detection)
+   ↓ (Intent Detection)
 ---------------------------------
 | Sales | Refund | Vacancy | Booking |
 ---------------------------------
+   ↓
+Output Guardrails
+   ↓
+Final Response
 ```
+
 ---
 ## Why This Architecture?
 
-This system:
-- Scales easily with new agents
-- Keeps responsibilities isolated
-- Mimics real-world organizational workflows
-- Improves maintainability and clarity
+- Scalable and modular
+- Clear separation of concerns
+- Real-world workflow simulation
+- Built-in safety with guardrails
+- Easy to extend with new agents
 ---
 
 ### Running the Agent
@@ -121,13 +129,6 @@ npm i dotenv
 ```
 OPENAI_API_KEY=your_openai_api_key = add your api key
 ```
----
-## Upcoming Changes
-
-- Planning to add **input and output guardrails** to improve security, safety, and response constraints
-- Better validation of user inputs before agent handoff
-- Controlled and structured agent outputs to avoid unexpected responses
-
 ---
 
 ## Contact
