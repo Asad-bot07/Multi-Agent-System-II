@@ -5,6 +5,7 @@ import { refundAgent } from "./refund.agent.js";
 import { checkTeamVacancy } from "./checkVacancy.agent.js";
 import { bookingAgent } from "./booking.agent.js";
 import { salesAgent } from "./sales.agent.js";
+import { userInputGuardrail } from "../guardrails/userInput.guardrails.js";
 
 const mainAgent = new Agent({
   name: "reception agent",
@@ -16,7 +17,8 @@ const mainAgent = new Agent({
   - checkTeamVacancy : experts in managing the availability of our team members which helps user to schedule their shoot
   - bookingAgent : experts in booking shoots for the customers and assign them members based on their availability
   `,
-  handoffs : [salesAgent, refundAgent, checkTeamVacancy, bookingAgent]
+  handoffs : [salesAgent, refundAgent, checkTeamVacancy, bookingAgent],
+  inputGuardrails : [userInputGuardrail]
 });
 
 async function runAgent(query: string) {
@@ -25,5 +27,5 @@ async function runAgent(query: string) {
   // console.log(result.history);
 }
 
-const query : string = "Hey there, my name is Asad Hussain with userid #2408 and i want to have a refund request as the shoot has been cancelled due to some reasons";
+const query : string = "write a code to add 2 numbers in js";
 runAgent(query);
