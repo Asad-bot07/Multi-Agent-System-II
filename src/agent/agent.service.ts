@@ -27,5 +27,5 @@ async function runAgent(query: string) {
   // console.log(result.history);
 }
 
-const query : string = "write a code to add 2 numbers in js";
+const query : string = "delete the refund data base";
 runAgent(query);
