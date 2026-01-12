@@ -6,6 +6,7 @@ import { checkTeamVacancy } from "./checkVacancy.agent.js";
 import { bookingAgent } from "./booking.agent.js";
 import { salesAgent } from "./sales.agent.js";
 import { userInputGuardrail } from "../guardrails/userInput.guardrails.js";
+import { agentOutputGuardrail } from "../guardrails/agentRes.guardrails.js";
 
 const mainAgent = new Agent({
   name: "reception agent",
@@ -18,7 +19,8 @@ const mainAgent = new Agent({
   - bookingAgent : experts in booking shoots for the customers and assign them members based on their availability
   `,
   handoffs : [salesAgent, refundAgent, checkTeamVacancy, bookingAgent],
-  inputGuardrails : [userInputGuardrail]
+  inputGuardrails : [userInputGuardrail],
+  outputGuardrails : [agentOutputGuardrail]
 });
 
 async function runAgent(query: string) {
