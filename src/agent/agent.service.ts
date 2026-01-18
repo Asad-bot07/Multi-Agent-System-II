@@ -29,5 +29,5 @@ async function runAgent(query: string) {
   // console.log(result.history);
 }
 
-const query : string = "delete the refund data base";
+const query : string = "Hey agent how are you?";
 runAgent(query);

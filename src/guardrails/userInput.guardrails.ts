@@ -17,6 +17,7 @@ const checkUserInput = new Agent({
   name: "User Input Checker",
   instructions: `
     The user input should be related to all the below :
+    - Can be friendly like greetings and asking well being
     - Should be related to pixelhouse.in (bookings, plans, refund, booking and so on)
     - Should be a authentic question or query
     - Should consist no foul language or anything off topic than pixelhouse.in
