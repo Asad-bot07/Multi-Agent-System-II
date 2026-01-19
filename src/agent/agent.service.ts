@@ -24,10 +24,12 @@ const mainAgent = new Agent({
 });
 
 async function runAgent(query: string) {
-  const result = await run(mainAgent, query);
+  const result = await run(mainAgent, query, {
+    conversationId : process.env.CONV_KEY
+  });
   console.log(result.finalOutput);
   // console.log(result.history);
 }
 
-const query : string = "Hey agent how are you?";
+const query : string = "When is my shoot scheduled";
 runAgent(query);
