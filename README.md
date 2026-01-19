@@ -44,9 +44,42 @@ At the core of the system is a **Reception Agent** that understands user intent,
 - Multi-agent architecture
 - Central **Reception Agent**
 - Automatic intent-based handoff
+- **Conversation Threads** (Stateful Conversations)
 - **Input guardrails** for safety & validation
 - **Output guardrails** for controlled responses
 - Modular and scalable design
+---
+## Conversation Threads
+This multi-agent system supports **conversation threads** so the assistant can remember context across multiple user messages (like a real receptionist).
+
+Instead of treating every message as a new request, the system keeps the same thread/session id so agents can:
+- Continue the same conversation
+- Remember previously shared details (user id, booking info, refund reason, etc.)
+- Avoid asking repeated questions
+- Maintain smooth handoff between agents
+
+### Thread Flow in This Architecture
+```
+User Message
+   ↓
+Thread ID (same session)
+   ↓
+Reception Agent
+   ↓
+Agent Handoff (Sales / Refund / Vacancy / Booking)
+   ↓
+Response Stored in Same Thread
+```
+### Example (Thread-Based Run)
+```ts
+async function runAgent(query: string) {
+  const result = await run(mainAgent, query, {
+    conversationId : process.env.CONV_KEY
+  });
+  console.log(result.finalOutput);
+  // console.log(result.history);
+}
+```
 ---
 ## Architecture Overview
 
